@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Academia da Inclusão - Sala de Aula</title>
+    <link rel="stylesheet" href="AcademiadaInclusao.css">
+</head>
+
+<body>
+    <!-- Barra superior do Totem (Jogador + Pontos + Finalizar) -->
+    <header class="BarraTotem">
+        <div class="InfoJogador">
+            <span id="hudJogador">Jogador: Visitante</span>
+            <span id="hudPontos" class="BadgePontos">Pontos: 0</span>
+        </div>
+        <button type="button" class="BotaoFinalizar" onclick="FinalizarJogo()">
+            FINALIZAR RODADA
+        </button>
+    </header>
+
+    <!-- Camada que escurece e embaça o fundo ao conversar -->
+    <div id="overlayFoco" class="OverlayFoco" onclick="FecharDialogo()"></div>
+
+    <div class="Titulo">
+        <h1 class="A1">~ Sala de aula Nº 8 ~</h1>
+        <h2 class="A1">Toque nos colegas que não saíram para o recreio e descubra como ajudar!</h2>
+    </div>
+    
+    <!-- Setor Cauã -->
+    <div id="setorCaua" class="PosicaoCaua">
+        <button id="Caua" type="button" onclick="AbrirDialogo('Caua')" class="EstiloCaua">
+            <img src="CauaInicial.png" alt="Cauã">
+        </button>
+
+        <div id="menuCaua" class="OrganizarBotoes">
+            <p class="InstrucaoMenu">Como você responde ao Cauã?</p>
+            <button id="11caua" type="button" onclick="Responder('Caua', -5)" class="BalaodeFalaNormal">
+                Desculpa, estou ocupado agora.
+            </button>
+            <button id="12caua" type="button" onclick="Responder('Caua', -10)" class="BalaodeFalaNormal">
+                Oxi, dá teu jeito irmão.
+            </button>
+            <button id="13caua" type="button" onclick="Responder('Caua', 10)" class="BalaodeFalaNormal">
+                Claro, quer que eu te acompanhe até onde?
+            </button>
+        </div>
+    </div>
+
+    <!-- Setor Osana -->
+    <div id="setorOsana" class="PosicaoOsana">
+        <button id="Osana" type="button" onclick="AbrirDialogo('Osana')" class="EstiloOsana">
+            <img src="Osana.png" alt="Osana">
+        </button>
+
+        <div id="menuOsana" class="OrganizarBotoes">
+            <p class="InstrucaoMenu">Como você responde à Osana?</p>
+            <button id="11Osana" type="button" onclick="Responder('Osana', -5)" class="BalaodeFalaNormal">
+                Deixa que eu empurro sua cadeira logo! (sem pedir)
+            </button>
+            <button id="12Osana" type="button" onclick="Responder('Osana', -10)" class="BalaodeFalaNormal">
+                É melhor você ficar na sala mesmo, lá fora está cheio.
+            </button>
+            <button id="13Osana" type="button" onclick="Responder('Osana', 10)" class="BalaodeFalaNormal">
+                Quer ajuda para afastar aquela carteira da passagem?
+            </button>
+        </div>
+    </div>
+    
+    <!-- Setor Ramirez -->
+    <div id="setorRamirez" class="PosicaoRamirez">
+        <button id="Ramirez" type="button" onclick="AbrirDialogo('Ramirez')" class="EstiloRamirez">
+            <img src="Ramirez.png" alt="Ramirez">
+        </button>
+
+        <div id="menuRamirez" class="OrganizarBotoes">
+            <p class="InstrucaoMenu">Como você fala com o Ramirez?</p>
+            <button id="11Ramirez" type="button" onclick="Responder('Ramirez', -5)" class="BalaodeFalaNormal">
+                Gritar bem alto de costas para ele ouvir.
+            </button>
+            <button id="12Ramirez" type="button" onclick="Responder('Ramirez', -10)" class="BalaodeFalaNormal">
+                Deixar para lá, vai dar muito trabalho explicar.
+            </button>
+            <button id="13Ramirez" type="button" onclick="Responder('Ramirez', 10)" class="BalaodeFalaNormal">
+                Tocar levemente no ombro dele, olhar de frente e gesticular.
+            </button>
+        </div>
+    </div>
+    
+    <script src="AcademiadaInclusao.js"></script>
+</body>
+</html>

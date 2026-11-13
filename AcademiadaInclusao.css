@@ -1,0 +1,337 @@
+/* Gerais e otimização para Totem Touch Screen */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600;800&display=swap');
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+    touch-action: manipulation;
+    user-select: none;
+}
+
+body {
+    background-image: url('saladeAula.png');
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-attachment: fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    height: 100dvh;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Barra superior do Totem */
+.BarraTotem {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 24px;
+    background: rgba(12, 16, 46, 0.9);
+    border-bottom: 3px solid #ffd166;
+    z-index: 15;
+}
+
+.InfoJogador {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 1.05rem;
+}
+
+.BadgePontos {
+    background-color: #ffd166;
+    color: #111111;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    padding: 8px 14px;
+    border-radius: 8px;
+}
+
+.BotaoFinalizar {
+    min-height: 48px;
+    padding: 12px 18px;
+    background-color: #4ade80;
+    color: #111111;
+    border: 2px solid #111111;
+    border-radius: 10px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: transform 0.15s ease, background-color 0.2s ease;
+}
+
+.BotaoFinalizar:active {
+    transform: scale(0.96);
+    background-color: #22c55e;
+}
+
+/* Título da sala */
+.Titulo {
+    color: white;
+    text-align: center;
+    padding: 92px 20px 0 20px;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.9);
+    position: relative;
+    z-index: 5;
+}
+
+.Titulo h1 {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+}
+
+.Titulo h2 {
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+.A1 {
+    margin: 0;
+}
+
+.OverlayFoco {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+    z-index: 10;
+}
+
+/* Menu de respostas ampliado para toque */
+.OrganizarBotoes {
+    display: none;
+    flex-direction: column;
+    gap: 14px;
+    background-color: rgba(20, 24, 34, 0.96);
+    border: 3px solid #ffffff;
+    border-radius: 16px;
+    padding: 22px;
+    width: 420px;
+    max-width: 90vw;
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.75);
+}
+
+.InstrucaoMenu {
+    color: #ffd166;
+    font-size: 0.95rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 0 6px 0;
+}
+
+.BalaodeFalaNormal {
+    width: 100%;
+    min-height: 58px;
+    border: 2px solid #1a1a1a;
+    border-radius: 10px;
+    background-color: #ffffff;
+    color: #111111;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    text-align: left;
+    padding: 14px 18px;
+    margin: 0;
+    cursor: pointer;
+    transition: background-color 0.15s ease, transform 0.15s ease;
+}
+
+.BalaodeFalaNormal:hover,
+.BalaodeFalaNormal:active {
+    background-color: #ffd166;
+    transform: scale(1.02);
+}
+
+/* Indicador visual quando o personagem já foi respondido */
+.respondido img {
+    opacity: 0.72;
+    filter: grayscale(45%) drop-shadow(0px 8px 6px rgba(0, 0, 0, 0.6)) !important;
+}
+
+/* =========================================
+   SETOR CAUÃ (Direita - menu abre à esquerda)
+   ========================================= */
+.PosicaoCaua {
+    position: fixed;
+    bottom: 10%;
+    right: 9%;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 24px;
+    z-index: 5;
+}
+
+.PosicaoCaua.em-destaque {
+    z-index: 25;
+}
+
+.EstiloCaua {
+    width: 195px;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 0;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.EstiloCaua img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0px 10px 6px rgba(0, 0, 0, 0.65));
+}
+
+.PosicaoCaua.em-destaque .EstiloCaua img {
+    filter: drop-shadow(0px 10px 16px rgba(255, 255, 255, 0.4));
+    transform: scale(1.06);
+}
+
+/* =========================================
+   SETOR OSANA (Esquerda - menu abre à direita)
+   ========================================= */
+.PosicaoOsana {
+    position: fixed;
+    bottom: 9%;
+    left: 7%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+    z-index: 5;
+}
+
+.PosicaoOsana.em-destaque {
+    z-index: 25;
+}
+
+.EstiloOsana {
+    width: 240px;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 0;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.EstiloOsana img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0px 10px 6px rgba(0, 0, 0, 0.65));
+}
+
+.PosicaoOsana.em-destaque .EstiloOsana img {
+    filter: drop-shadow(0px 10px 16px rgba(255, 255, 255, 0.4));
+    transform: scale(1.06);
+}
+
+/* =========================================
+   SETOR RAMIREZ (Fundo/Centro - menu abre à direita)
+   ========================================= */
+.PosicaoRamirez {
+    position: fixed;
+    bottom: 39%;
+    left: 47%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+    z-index: 5;
+}
+
+.PosicaoRamirez.em-destaque {
+    z-index: 25;
+}
+
+.EstiloRamirez {
+    width: 165px;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 0;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.EstiloRamirez img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0px 8px 5px rgba(0, 0, 0, 0.65));
+}
+
+.PosicaoRamirez.em-destaque .EstiloRamirez img {
+    filter: drop-shadow(0px 10px 16px rgba(255, 255, 255, 0.4));
+    transform: scale(1.15);
+}
+
+/* =========================================
+   TOTEM VERTICAL (Portrait) E TELAS MENORES
+   ========================================= */
+@media (orientation: portrait), (max-width: 900px) {
+    .OrganizarBotoes {
+        width: 88vw;
+        max-width: 620px;
+        padding: 24px;
+    }
+
+    .BalaodeFalaNormal {
+        font-size: 1.15rem;
+        padding: 18px 20px;
+    }
+
+    .PosicaoCaua {
+        right: 5%;
+        bottom: 8%;
+    }
+    .EstiloCaua {
+        width: 165px;
+    }
+
+    .PosicaoOsana {
+        left: 5%;
+        bottom: 8%;
+    }
+    .EstiloOsana {
+        width: 205px;
+    }
+
+    .PosicaoRamirez {
+        left: 40%;
+        bottom: 40%;
+    }
+    .EstiloRamirez {
+        width: 145px;
+    }
+
+    /* Centraliza o personagem e os botões na frente da tela do totem ao tocar */
+    .PosicaoCaua.em-destaque,
+    .PosicaoOsana.em-destaque,
+    .PosicaoRamirez.em-destaque {
+        left: 50%;
+        right: auto;
+        bottom: 7%;
+        transform: translateX(-50%);
+        flex-direction: column-reverse;
+        gap: 18px;
+    }
+}

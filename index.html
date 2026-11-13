@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Academia da Inclusão - Início</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600;800&display=swap');
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            touch-action: manipulation;
+            user-select: none;
+        }
+
+        body {
+            background: radial-gradient(circle at top, #0a0a8f 0%, #000066 65%, #00003d 100%);
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 24px 32px 32px 32px;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* 1. Logos distribuídas no topo do totem */
+        .AlinharLogos {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+            max-width: 1100px;
+            margin-bottom: 10px;
+        }
+
+        .EstiloLogos {
+            height: 85px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.5));
+        }
+
+        /* 2. Título e chamada */
+        .EstiloTitulo {
+            width: 100%;
+            max-width: 540px;
+            height: auto;
+            display: block;
+            margin: 0 auto 6px auto;
+            filter: drop-shadow(0px 8px 16px rgba(0, 0, 0, 0.6));
+        }
+
+        .SubtituloHeroi {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.35rem;
+            color: #ffd166;
+            text-align: center;
+            text-shadow: 3px 3px 0px #000000;
+            margin: 6px 0 20px 0;
+        }
+
+        /* 3. Seleção de Herói (Milly e Lucas) */
+        .EstiloDupla {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 56px;
+            flex-wrap: wrap;
+            margin-bottom: 28px;
+        }
+
+        .EstiloPersonagens {
+            background: rgba(255, 255, 255, 0.04);
+            border: 3px solid transparent;
+            border-radius: 16px;
+            outline: none;
+            padding: 14px 20px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+        }
+
+        .EstiloPersonagens img {
+            width: 190px;
+            height: auto;
+            display: block;
+            filter: drop-shadow(0px 10px 8px rgba(0, 0, 0, 0.65));
+            transition: transform 0.2s ease, filter 0.2s ease;
+        }
+
+        .NomeHeroi {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.95rem;
+            color: #ffffff;
+            background-color: rgba(0, 0, 0, 0.65);
+            padding: 10px 18px;
+            border-radius: 8px;
+            border: 2px solid transparent;
+        }
+
+        .EstiloPersonagens:active {
+            transform: scale(0.97);
+        }
+
+        .EstiloPersonagens.selecionado {
+            background-color: rgba(255, 209, 102, 0.14);
+            border-color: #ffd166;
+        }
+
+        .EstiloPersonagens.selecionado img {
+            filter: drop-shadow(0px 0px 18px rgba(255, 209, 102, 0.95));
+            transform: scale(1.06);
+        }
+
+        .EstiloPersonagens.selecionado .NomeHeroi {
+            color: #111111;
+            background-color: #ffd166;
+            border-color: #ffffff;
+        }
+
+        /* 4. Área de cadastro adaptada para toque no totem */
+        .AreaCadastro {
+            background-color: rgba(12, 16, 46, 0.94);
+            border: 3px solid #ffffff;
+            border-radius: 18px;
+            padding: 28px 32px;
+            width: 100%;
+            max-width: 680px;
+            box-shadow: 0 14px 32px rgba(0, 0, 0, 0.6);
+            margin-bottom: 26px;
+        }
+
+        .TituloSecao {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #ffd166;
+            text-align: center;
+            margin: 0 0 22px 0;
+        }
+
+        .CampoLabel {
+            display: block;
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: #e2e8f0;
+        }
+
+        .OpcoesCurso {
+            display: flex;
+            justify-content: space-between;
+            gap: 14px;
+            margin-bottom: 22px;
+        }
+
+        .CursoItem {
+            flex: 1;
+            min-height: 58px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            border-radius: 12px;
+            padding: 14px;
+            font-size: 1.15rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .CursoItem:active {
+            transform: scale(0.98);
+        }
+
+        .CursoItem:has(input:checked) {
+            background-color: rgba(255, 209, 102, 0.25);
+            border-color: #ffd166;
+            color: #ffd166;
+        }
+
+        .CursoItem input {
+            accent-color: #ffd166;
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+        }
+
+        .InputNome {
+            width: 100%;
+            min-height: 60px;
+            padding: 14px 18px;
+            border: 3px solid #ffffff;
+            border-radius: 12px;
+            background-color: #ffffff;
+            color: #111111;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 22px;
+            outline: none;
+            user-select: text;
+        }
+
+        .InputNome:focus {
+            border-color: #ffd166;
+            box-shadow: 0 0 0 4px rgba(255, 209, 102, 0.4);
+        }
+
+        .BotaoConfirmar {
+            width: 100%;
+            min-height: 66px;
+            padding: 18px;
+            border: 3px solid #1111
